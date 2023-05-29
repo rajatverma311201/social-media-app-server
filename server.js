@@ -7,12 +7,17 @@ const DB = process.env.DATABASE_URI.replace(
     process.env.DATABASE_PASSWORD
 );
 
-mongoose
-    .connect(DB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("DB connection successful!"));
+(async () => {
+    try {
+        await mongoose.connect(DB, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("DB connection successful!");
+    } catch (error) {
+        console.log(error);
+    }
+})();
 
 const port = process.env.PORT || 9090;
 app.listen(port, () => {
