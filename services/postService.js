@@ -1,16 +1,16 @@
-const User = require("../models/userModel");
 const Post = require("../models/postModel");
-const Follow = require("../models/followModel");
-const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/appError");
 
-exports.getAllPosts = catchAsync(async (req, res, next) => {
-    const posts = await Post.find().populate("user");
-    res.status(200).json({
-        status: "success",
-        results: posts.length,
-        data: {
-            posts,
-        },
-    });
-});
+const handlerFactoryService = require("./handlerFactoryService");
+
+exports.getAllPosts = async () => await handlerFactoryService.getAll(Post)();
+
+exports.getPost = async (id) => await handlerFactoryService.getOne(Post)(id);
+
+exports.createPost = async (body) =>
+    await handlerFactoryService.createOne(Post)(body);
+
+exports.updatePost = async (id, body) =>
+    await handlerFactoryService.updateOne(Post)(id, body);
+
+exports.deletePost = async (id) =>
+    await handlerFactoryService.deleteOne(Post)(id);
