@@ -7,7 +7,7 @@ const AppError = require("../utils/appError");
 const User = require("../models/userModel");
 
 const signToken = (id) => {
-    console.log("sign token");
+    // console.log("sign token");
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
@@ -15,7 +15,7 @@ const signToken = (id) => {
 
 const createJwtToken = (user) => {
     const token = signToken(user._id);
-    console.log("create token");
+    // console.log("create token");
     return token;
 };
 
