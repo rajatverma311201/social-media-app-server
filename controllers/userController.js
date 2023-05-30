@@ -1,11 +1,11 @@
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const userService = require("../services/userService");
-
+const HttpStatus = require("http-status");
 exports.getAllUsers = catchAsync(async (req, res, next) => {
     const users = await userService.getAllUsers();
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         results: users.length,
         data: {
@@ -15,13 +15,14 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
+    // console.log(req.params.id);
     const user = await userService.getUser(req.params.id);
 
     if (!user) {
         return next(new AppError("No user found with that ID", 404));
     }
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         data: {
             user,
@@ -32,7 +33,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
 exports.createUser = catchAsync(async (req, res, next) => {
     const user = await userService.createUser(req.body);
 
-    res.status(201).json({
+    res.status(HttpStatus.CREATED).json({
         status: "success",
         data: {
             user,
@@ -47,7 +48,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
         return next(new AppError("No user found with that ID", 404));
     }
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         data: {
             user,
@@ -62,7 +63,7 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
         return next(new AppError("No user found with that ID", 404));
     }
 
-    res.status(204).json({
+    res.status(HttpStatus.NO_CONTENT).json({
         status: "success",
         data: null,
     });

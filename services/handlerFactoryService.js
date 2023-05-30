@@ -22,7 +22,9 @@ exports.createOne = (Model) => async (body) => {
 };
 
 exports.getOne = (Model) => async (id, popOptions) => {
+    // console.log("GET ONE", id);
     let query = Model.findById(id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
+    return doc;
 };

@@ -7,9 +7,11 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler");
 
 // ROUTES IMPORT
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const followRoutes = require("./routes/followRoutes");
-const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
 // EXPRESS APP DECLARATION
 const app = express();
@@ -24,9 +26,11 @@ if (process.env.NODE_ENV === "development") {
 
 // 3) ROUTES
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/posts", postRoutes);
 app.use("/api/v1/follows", followRoutes);
-app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/chats", chatRoutes);
+app.use("/api/v1/messages", messageRoutes);
 
 // HOME PAGE ROUTE
 app.get("/", (req, res) => {

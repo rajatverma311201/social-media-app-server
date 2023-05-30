@@ -1,11 +1,11 @@
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const postService = require("../services/postService");
-
+const HttpStatus = require("http-status");
 exports.getAllPosts = catchAsync(async (req, res, next) => {
     const posts = await postService.getAllPosts();
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         results: posts.length,
         data: {
@@ -21,7 +21,7 @@ exports.getPost = catchAsync(async (req, res, next) => {
         return next(new AppError("No post found with that ID", 404));
     }
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         data: {
             post,
@@ -32,7 +32,7 @@ exports.getPost = catchAsync(async (req, res, next) => {
 exports.createPost = catchAsync(async (req, res, next) => {
     const post = await postService.createPost(req.body);
 
-    res.status(201).json({
+    res.status(HttpStatus.CREATED).json({
         status: "success",
         data: {
             post,
@@ -47,7 +47,7 @@ exports.updatePost = catchAsync(async (req, res, next) => {
         return next(new AppError("No post found with that ID", 404));
     }
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         status: "success",
         data: {
             post,
@@ -62,7 +62,7 @@ exports.deletePost = catchAsync(async (req, res, next) => {
         return next(new AppError("No post found with that ID", 404));
     }
 
-    res.status(204).json({
+    res.status(HttpStatus.NO_CONTENT).json({
         status: "success",
         data: null,
     });
