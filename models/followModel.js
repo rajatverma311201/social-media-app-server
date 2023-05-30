@@ -7,6 +7,7 @@ const followSchema = new mongoose.Schema(
             ref: "User",
             required: [true, "A follower must be specified"],
         },
+
         following: {
             type: mongoose.Schema.ObjectId,
             ref: "User",
