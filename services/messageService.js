@@ -2,6 +2,15 @@ const Message = require("../models/messageModel");
 
 const handlerFactoryService = require("./handlerFactoryService");
 
+exports.getMyAllMessages = async (userId) =>
+    await handlerFactoryService.getMyAll(Message)(userId);
+
+exports.updateMyMessage = async (messageId, userId, body) =>
+    await handlerFactoryService.updateMyOne(Message)(messageId, userId, body);
+
+exports.deleteMyMessage = async (messageId, userId) =>
+    await handlerFactoryService.deleteMyOne(Message)(messageId, userId);
+
 exports.getAllMessages = async () =>
     await handlerFactoryService.getAll(Message)();
 
