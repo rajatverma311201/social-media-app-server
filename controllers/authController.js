@@ -3,7 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const authService = require("../services/authService");
 const HttpStatus = require("http-status");
 exports.signup = catchAsync(async (req, res, next) => {
-    console.log(process.env.JWT_SECRET);
+    // console.log(process.env.JWT_SECRET);
 
     const { firstName, lastName, username, password, passwordConfirm } =
         req.body;

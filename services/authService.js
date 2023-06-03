@@ -22,7 +22,7 @@ const createJwtToken = (user) => {
 exports.signup = async (firstName, lastName, username, password) => {
     const userExist = await User.findOne({ username });
     if (userExist) {
-        console.log("user dont exist");
+        // console.log("user dont exist");
         return {
             error: {
                 message: "User already exists!",
