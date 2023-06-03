@@ -14,6 +14,15 @@ exports.signup = catchAsync(async (req, res, next) => {
         );
     }
 
+    if (password.length < 8) {
+        return next(
+            new AppError(
+                "Password must be at least 8 characters long",
+                HttpStatus.BAD_REQUEST
+            )
+        );
+    }
+
     if (password !== passwordConfirm) {
         return next(
             new AppError("Passwords do not match!", HttpStatus.BAD_REQUEST)

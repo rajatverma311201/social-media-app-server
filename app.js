@@ -12,9 +12,12 @@ const postRoutes = require("./routes/postRoutes");
 const followRoutes = require("./routes/followRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
-
+const cors = require("cors");
 // EXPRESS APP DECLARATION
 const app = express();
+
+app.enable("trust proxy");
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
